@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>canvas</title>
+    <style>
+        body {
+            text-align: center;
+            padding-top: 20px;
+        }
+
+        canvas {
+            box-shadow: 0 0 10px #333;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas width="800" height="600" id="myCanvas">
+
+    </canvas>
+    <script>
+        window.onload = function () {
+            var myCanavas = document.querySelector("#myCanvas");
+            if (myCanavas.getContext) {
+                // 获取画笔
+                var ctx = myCanavas.getContext('2d');
+                // 设置颜色
+                ctx.fillStyle = "#ff0000";
+                // 填充画布
+                // cvsCtx.fillRect(x, y, width, height);距离左上角的x,y距离,canvas图像的宽高
+                ctx.fillRect(10, 10, 350, 300);
+                ctx.fillStyle = "#66ff00";
+                ctx.strokeRect(30,30,450,450);
+            }
+        }
+    </script>
+</body>
+
+</html>
