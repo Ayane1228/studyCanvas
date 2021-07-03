@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>canvas</title>
+    <style> 
+        body{
+            text-align: center;
+            padding-top: 20px;
+        }
+        canvas{
+            box-shadow: 0 0 10px #333;
+            margin: 0 auto;
+        }
+
+    </style>
+</head>
+<body>
+    <canvas width="800" height="600" id="myCanvas">
+
+    </canvas>
+    <script>
+        /*
+
+        3. 把路径闭合
+        即最终的坐标要与起始坐标相同
+
+        */
+    window.onload = function(){
+        var myCanavas = document.querySelector("#myCanvas");
+            if (myCanavas.getContext) {
+                // 获取画笔
+                var ctx = myCanavas.getContext('2d');
+                //  1. 创建路径、创建起始点
+                // beginPath():创建路径
+                // moveTo(x,y)创建起始点距左上角的位置
+                ctx.beginPath();
+                ctx.moveTo(50,50);
+                //  2. 使用画图命令画出路径
+                // lineTo(x,y):路径要去的坐标
+                ctx.lineTo(100,100);
+                ctx.lineTo(100,50);
+                //  3. 把路径闭合
+                // 即最终的坐标要与起始坐标相同：可以直接使用closePath()方法直接实现闭合
+                ctx.closePath();
+                //  4. 通过描边或填充显示图形
+                // fill()或stroke()
+                ctx.stroke();
+
+                ctx.beginPath();
+                ctx.moveTo(125,50);
+                ctx.lineTo(125,100);
+                ctx.lineTo(175,50);
+                ctx.closePath();
+                ctx.fill();
+            } 
+    }   
+    </script>
+</body>
+</html>
