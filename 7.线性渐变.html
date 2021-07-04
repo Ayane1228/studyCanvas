@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>canvas</title>
+    <style> 
+        body{
+            text-align: center;
+            padding-top: 20px;
+        }
+        canvas{
+            box-shadow: 0 0 10px #333;
+            margin: 0 auto;
+        }
+
+    </style>
+</head>
+<body>
+    <canvas width="800" height="600" id="myCanvas">
+
+    </canvas>
+    <script>
+    window.onload = function(){
+        var myCanavas = document.querySelector("#myCanvas");
+            if (myCanavas.getContext) {
+                // 获取画笔
+                var ctx = myCanavas.getContext('2d');
+                // cvsCtx.createLinearGradient(x0, y0, x1, y1);创建线性渐变
+                var lingrad = ctx.createLinearGradient(0, 0, 200, 200);
+                // cvsCtx.addColorStop(stop(0 ~ 1), color);线性变化的添加颜色方法:
+                lingrad.addColorStop(0,"black");
+                lingrad.addColorStop("0.3","magenta");
+                lingrad.addColorStop("0.5","blue");
+                lingrad.addColorStop("0.6","green");
+                lingrad.addColorStop("0.8","yellow");
+                lingrad.addColorStop(1,"red");
+                // 表示ctx使用这个linggrad样式
+                ctx.fillStyle = lingrad;
+                // 绘制图形
+                ctx.fillRect(10,10,200,200);
+                var lingrad2 = ctx.createLinearGradient(50,50,150,150);
+                lingrad2.addColorStop(0,"black");
+                lingrad2.addColorStop(1,"white");
+                ctx.strokeStyle = lingrad2;
+                ctx.strokeRect(35,35,150,150)
+            } 
+    }
+    </script>
+</body>
+</html>

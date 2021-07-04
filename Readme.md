@@ -289,5 +289,201 @@ canvas元素用于使用JavaScript在网页上绘制图片,提供了一块画布
 </html>
 ```
 
-## 
+## 画笑脸
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>canvas</title>
+    <style> 
+        body{
+            text-align: center;
+            padding-top: 20px;
+        }
+        canvas{
+            box-shadow: 0 0 10px #333;
+            margin: 0 auto;
+        }
+
+    </style>
+</head>
+<body>
+    <canvas width="800" height="600" id="myCanvas">
+
+    </canvas>
+    <script>
+    window.onload = function(){
+        var myCanavas = document.querySelector("#myCanvas");
+            if (myCanavas.getContext) {
+                // 获取画笔
+                var ctx = myCanavas.getContext('2d');
+                // 画笔的颜色和粗细
+                ctx.strokeStyle = 'blue';
+                ctx.lineWidth = 10;
+                ctx.beginPath();
+                ctx.arc(400,300,300,0,2 * Math.PI,false);
+                ctx.stroke();
+                ctx.beginPath();
+                ctx.arc(300,250,50,0,2 * Math.PI,false);
+                ctx.stroke();
+                ctx.beginPath();
+                ctx.arc(500,250,50,0,2*Math.PI,false);
+                ctx.stroke();
+                ctx.beginPath();
+                ctx.arc(400,400,150,0,Math.PI,false);
+                ctx.stroke();
+
+            } 
+    }
+    </script>
+</body>
+</html>
+```
+
+## 线性渐变
+
+创建线性渐变方法`cvsCtx.createLinearGradient(x0, y0, x1, y1);`
+
+参数:起始点X1,起始点Y1,终点X2,终点Y2(是指相对于画布的坐标)
+
+线性变化的添加颜色方法:`cvsCtx.addColorStop(stop(0 ~ 1), color);`
+
+参数:表示颜色所在的相对位置,颜色 
+
+> `ctx.fillStyle = lingrad`表示`ctx`使用这个`linggrad`样式
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>canvas</title>
+    <style> 
+        body{
+            text-align: center;
+            padding-top: 20px;
+        }
+        canvas{
+            box-shadow: 0 0 10px #333;
+            margin: 0 auto;
+        }
+
+    </style>
+</head>
+<body>
+    <canvas width="800" height="600" id="myCanvas">
+
+    </canvas>
+    <script>
+    window.onload = function(){
+        var myCanavas = document.querySelector("#myCanvas");
+            if (myCanavas.getContext) {
+                // 获取画笔
+                var ctx = myCanavas.getContext('2d');
+                // cvsCtx.createLinearGradient(x0, y0, x1, y1);创建线性渐变
+                var lingrad = ctx.createLinearGradient(0, 0, 200, 200);
+                // cvsCtx.addColorStop(stop(0 ~ 1), color);线性变化的添加颜色方法:
+                lingrad.addColorStop(0,"black");
+                lingrad.addColorStop("0.3","magenta");
+                lingrad.addColorStop("0.5","blue");
+                lingrad.addColorStop("0.6","green");
+                lingrad.addColorStop("0.8","yellow");
+                lingrad.addColorStop(1,"red");
+                // 表示ctx使用这个linggrad样式
+                ctx.fillStyle = lingrad;
+                // 绘制图形
+                ctx.fillRect(10,10,200,200);
+                var lingrad2 = ctx.createLinearGradient(50,50,150,150);
+                lingrad2.addColorStop(0,"black");
+                lingrad2.addColorStop(1,"white");
+                ctx.strokeStyle = lingrad2;
+                ctx.strokeRect(35,35,150,150)
+            } 
+    }
+    </script>
+</body>
+</html>
+```
+
+## 径向渐变(创建放射状/环形的渐变)
+
+方法：·`context.createRadialGradient(x0,y0,r0,x1,y1,r1); `
+
+参数:
+
+1. 渐变的开始圆心的 x 坐标
+2.  渐变的开始圆心的 y 坐标
+3. 开始圆的半径
+4. 渐变的结束圆的心 x 坐标
+5. 渐变的结束圆心的 y 坐标
+6. 结束圆的半径
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>canvas</title>
+    <style> 
+        body{
+            text-align: center;
+            padding-top: 20px;
+        }
+        canvas{
+            box-shadow: 0 0 10px #333;
+            margin: 0 auto;
+        }
+
+    </style>
+</head>
+<body>
+    <canvas width="800" height="600" id="myCanvas">
+
+    </canvas>
+    <script>
+    window.onload = function(){
+        var myCanavas = document.querySelector("#myCanvas");
+            if (myCanavas.getContext) {
+                // 获取画笔
+                var ctx = myCanavas.getContext('2d');
+                var grad = ctx.createRadialGradient(400,300,100,400,300,200)
+                grad.addColorStop(0,"blue");
+                grad.addColorStop(0.5,"red");
+                grad.addColorStop(0.8,"pink");
+                grad.addColorStop(0.9,"pink");
+                grad.addColorStop(1,"green");
+                // 确定绘制的渐变样式
+                ctx.fillStyle = grad;
+                ctx.fillRect(400,300,200,200);
+            } 
+    }
+    </script>
+</body>
+</html>
+```
+
+## 绘制图片
+
+将图片渲染到画布中
+
+方法`cvsCtx.createPattern(image, repetition);`
+
+参数:
+
+1. img元素
+2. 是否`repeat`,以及`repeat`方向：`repeat|repeat-x|repeat-y|no-repeat`
+
+> 在绘制图像时一定要确保图片已经加载完成
+
+```html
+
+```
 

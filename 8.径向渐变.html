@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>canvas</title>
+    <style> 
+        body{
+            text-align: center;
+            padding-top: 20px;
+        }
+        canvas{
+            box-shadow: 0 0 10px #333;
+            margin: 0 auto;
+        }
+
+    </style>
+</head>
+<body>
+    <canvas width="800" height="600" id="myCanvas">
+
+    </canvas>
+    <script>
+    window.onload = function(){
+        var myCanavas = document.querySelector("#myCanvas");
+            if (myCanavas.getContext) {
+                // 获取画笔
+                var ctx = myCanavas.getContext('2d');
+                var grad = ctx.createRadialGradient(400,300,100,400,300,200)
+                grad.addColorStop(0,"blue");
+                grad.addColorStop(0.5,"red");
+                grad.addColorStop(0.8,"pink");
+                grad.addColorStop(0.9,"pink");
+                grad.addColorStop(1,"green");
+                // 确定绘制的渐变样式
+                ctx.fillStyle = grad;
+                ctx.fillRect(400,300,200,200);
+            } 
+    }
+    </script>
+</body>
+</html>

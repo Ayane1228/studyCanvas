@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>canvas</title>
+    <style> 
+        body{
+            text-align: center;
+            padding-top: 20px;
+        }
+        canvas{
+            box-shadow: 0 0 10px #333;
+            margin: 0 auto;
+        }
+
+    </style>
+</head>
+<body>
+    <canvas width="800" height="600" id="myCanvas">
+
+    </canvas>
+    <script>
+    window.onload = function(){
+        var myCanavas = document.querySelector("#myCanvas");
+            if (myCanavas.getContext) {
+                // 获取画笔
+                var ctx = myCanavas.getContext('2d');
+                // cvsCtx.createPattern(image, repetition);
+                var myImg = new Image();
+                myImg.src = "https://static.chiphell.com/forum/202107/03/231037wnilp6ggu9x7pg95.jpg";
+                myImg.onload = function() {
+                    var parn =  ctx.createPattern(myImg,"no-repeat");
+                    ctx.fillStyle = parn;
+                    ctx.fillRect(0,0,800,600);
+                }
+            } 
+
+    }
+    </script>
+</body>
+</html>
