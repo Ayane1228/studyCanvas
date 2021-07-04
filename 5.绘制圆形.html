@@ -27,6 +27,21 @@
             if (myCanavas.getContext) {
                 // 获取画笔
                 var ctx = myCanavas.getContext('2d');
+                // 画笔的颜色和粗细
+                ctx.strokeStyle = 'blue';
+                ctx.lineWidth = 10;
+                ctx.beginPath();
+                ctx.arc(400,300,150,0,2 * Math.PI,false);
+                ctx.stroke();
+                // 半圆
+                ctx.beginPath();
+                ctx.arc(400,300,120,0,Math.PI,true);
+                ctx.stroke();
+                // 四分之圆
+                ctx.beginPath();
+                ctx.arc(400,300,20,0,0.5*Math.PI,true);
+                ctx.stroke();
+                // cvsCtx.arc(x, y, r, sAngle, eAngle, false);
             } 
     }
     </script>

@@ -236,3 +236,58 @@ canvas元素用于使用JavaScript在网页上绘制图片,提供了一块画布
 > ​	一整个圆的角度为`2 * Math.PI`
 >
 > anticlockwise:boolean类型,是否顺时针,默认为false(顺时针)
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>canvas</title>
+    <style> 
+        body{
+            text-align: center;
+            padding-top: 20px;
+        }
+        canvas{
+            box-shadow: 0 0 10px #333;
+            margin: 0 auto;
+        }
+
+    </style>
+</head>
+<body>
+    <canvas width="800" height="600" id="myCanvas">
+
+    </canvas>
+    <script>
+    window.onload = function(){
+        var myCanavas = document.querySelector("#myCanvas");
+            if (myCanavas.getContext) {
+                // 获取画笔
+                var ctx = myCanavas.getContext('2d');
+                // 画笔的颜色和粗细
+                ctx.strokeStyle = 'blue';
+                ctx.lineWidth = 10;
+                ctx.beginPath();
+                ctx.arc(400,300,150,0,2 * Math.PI,false);
+                ctx.stroke();
+                // 半圆
+                ctx.beginPath();
+                ctx.arc(400,300,120,0,Math.PI,true);
+                ctx.stroke();
+                // 四分之圆
+                ctx.beginPath();
+                ctx.arc(400,300,20,0,0.5*Math.PI,true);
+                ctx.stroke();
+                // cvsCtx.arc(x, y, r, sAngle, eAngle, false);
+            } 
+    }
+    </script>
+</body>
+</html>
+```
+
+## 
+
