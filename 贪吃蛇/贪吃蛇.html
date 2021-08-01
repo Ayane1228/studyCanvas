@@ -12,7 +12,6 @@
         }
         canvas{
             background-color: aqua;
-            margin: 0 auto;
         }
 
     </style>
@@ -46,7 +45,46 @@
             if (myCanavas.getContext) {
                 // 获取画笔上下文
                 var ctx = myCanavas.getContext('2d');
-                
+                // 块的大小
+                var g_block = 30;
+                // 块间的间隔
+                var g_margin = 3;
+                // 行列数
+                var g_row = 600 / g_block;
+                var g_col = 600/ g_block;
+                // 初始化蛇
+                var snake = [55,54];
+                // 初始化方向:向右
+                var direction = 1;
+                // 初始化食物
+                var food = 58;
+                // 初始化颜色 蛇 食物 背景
+                var colours = ['red','black','aqua'];
+                // 绘制块函数
+                function setBlock (id,colour){
+                    // 解构赋值,获取要绘制的位置
+                    let [ row,col ] = [~~(id/g_col),id%g_col];
+                    let [ x,y ] = [ col * g_block + g_margin,row * g_block + g_margin ];
+                    // 保存canvas状态
+                    ctx.save();
+                    // 绘制 颜色 位置 大小
+                    ctx.fillStyle = colours[colour];
+                    // ctx.fillRact(x,y,w,h);
+                    ctx.fillRect(x,y,g_block - g_margin * 2,g_block - g_margin * 2);
+                    ctx.restore();
+                }
+                // 初始化绘制蛇
+                snake.forEach(n=>setBlock(n,0));
+                setBlock(food,1);
+                // 手动移动蛇
+                let next = snake[0] + direction;
+                // 在头部添加下一节点
+                snake.unshift(next);
+                // 进行渲染
+                setBlock(next,0);
+                // 删除末节点并返回重新渲染为背景色
+                let tail = snake.pop();
+                setBlock(tail,2);
             } 
     }
     </script>
