@@ -484,6 +484,117 @@ canvas元素用于使用JavaScript在网页上绘制图片,提供了一块画布
 > 在绘制图像时一定要确保图片已经加载完成
 
 ```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>canvas</title>
+    <style> 
+        body{
+            text-align: center;
+            padding-top: 20px;
+        }
+        canvas{
+            box-shadow: 0 0 10px #333;
+            margin: 0 auto;
+        }
 
+    </style>
+</head>
+<body>
+    <canvas width="800" height="600" id="myCanvas">
+
+    </canvas>
+    <script>
+    window.onload = function(){
+        var myCanavas = document.querySelector("#myCanvas");
+            if (myCanavas.getContext) {
+                // 获取画笔
+                var ctx = myCanavas.getContext('2d');
+                // cvsCtx.createPattern(image, repetition);
+                var myImg = new Image();
+                myImg.src = "https://static.chiphell.com/forum/202107/03/231037wnilp6ggu9x7pg95.jpg";
+                myImg.onload = function() {
+                    var parn =  ctx.createPattern(myImg,"no-repeat");
+                    ctx.fillStyle = parn;
+                    ctx.fillRect(0,0,800,600);
+                }
+            } 
+
+    }
+    </script>
+</body>
+</html>
+```
+
+## 渲染文字
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>canvas</title>
+    <style> 
+        body{
+            text-align: center;
+            padding-top: 20px;
+        }
+        canvas{
+            box-shadow: 0 0 10px #333;
+            margin: 0 auto;
+        }
+
+    </style>
+</head>
+<body>
+    <canvas width="800" height="600" id="myCanvas">
+
+    </canvas>
+    <script>
+    window.onload = function(){
+        var myCanavas = document.querySelector("#myCanvas");
+            if (myCanavas.getContext) {
+                // 获取画笔上下文
+                var ctx = myCanavas.getContext('2d');
+                // 线性渐变的颜色 
+                // 开始/结束的X,Y轴位置
+                // cvsCtx.addColorStop(stop(0 ~ 1), color); 渐变颜色设置
+                var lin = ctx.createLinearGradient(100,200,500,200);
+                lin.addColorStop(0,blue);
+                lin.addColorStop(0.5,green);
+                lin.addColorStop(1,Weight);
+                /*
+                    阴影
+                    shadowColor:字体颜色
+                    shadowBlue：模糊度
+                    shadowOffsetX / Y :偏移量
+                */
+                ctx.shadowColor = 'blue';
+                ctx.shadowBlue = 50;
+                ctx.shadowOffsetX = 15;
+                ctx.shdowOffsetY = 15;
+                // 设置字体
+                /*
+                cvsCtx.font = 'style, weight, size, family';
+                参数：
+                    fontWeight: normal,加粗bold,bolder,缩小lighter或使用数字
+                    fontStyle: 文字样式:normal,italic斜体
+                    fontSize: 字体大小
+                    fontFamily:字体
+                */
+                ctx.font = 'bolder italic 80px Arial';
+
+               // 绘制字体 字符串 开始的X,Y位置 
+               ctx.fillText('BlackBird',100,100);
+            } 
+    }
+    </script>
+</body>
+</html>
 ```
 

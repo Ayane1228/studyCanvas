@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>canvas</title>
+    <style> 
+        body{
+            text-align: center;
+            padding-top: 20px;
+        }
+        canvas{
+            background-color: aqua;
+            margin: 0 auto;
+        }
+
+    </style>
+</head>
+<body>
+    <canvas width="600" height="600" id="myCanvas">
+
+    </canvas>
+    <script>
+    /*
+    *   贪吃蛇游戏：
+    *   组成： 蛇 数组[格子ID],食物：格子ID,操作:键盘上下左右
+    *   简介： 画布看做 20 * 20 的布,每一格的ID： 0 ~ 399
+    *   移动： 上/下/左/右： -20 / +20 / -1 / +1
+    *   键盘上下左右keyCode: 上/下/左/右 ：38 / 40 / 37 / 39
+    *   
+    * 如何通过解析ID来货对应的格子的位置 
+    *   X轴为第几个格子: 格子ID / 20 向下取整 y轴为第几个格子: 格子ID % 20，再 * 格子的宽高就能获得需要渲染的坐标
+    *   
+    *   移动：  
+    *       生成新的格子(当前头元素的位置加移动方向 next = snake[0] + 移动方向)添加到蛇数组的开头（unshift()方法）
+    *       删除数组的未元素 pop()
+    *  吃到食物：继续移动但不删除末元素 并 在蛇数组之外生成新的食物
+    * 
+    *  keycode    左/上/右/下: 37/38/39/40
+    *  对应的事件：左/上/右/下: -1/-20/+1/-20
+    *  实现 通过该数组的下标变化来判断坐标的变化值是多少： [-1,-20,1,20][keycode - 37] arr[下标]
+    */
+    window.onload = function(){
+        var myCanavas = document.querySelector("#myCanvas");
+            if (myCanavas.getContext) {
+                // 获取画笔上下文
+                var ctx = myCanavas.getContext('2d');
+                
+            } 
+    }
+    </script>
+</body>
+</html>

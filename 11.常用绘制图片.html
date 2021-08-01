@@ -22,11 +22,21 @@
 
     </canvas>
     <script>
+    // drawImage
     window.onload = function(){
         var myCanavas = document.querySelector("#myCanvas");
             if (myCanavas.getContext) {
                 // 获取画笔上下文
                 var ctx = myCanavas.getContext('2d');
+                // 创建图片元素
+                var img = new Image;
+                img.src = "../../素材/IMG_20210623_230403_784.jpg";
+                // img加载后绘制
+                img.onload = function (){
+                    // cvsCtx.drawImage(imageResource, dx, dy, dWidth, dHeight);
+                    //  参数：图片src,位置,图片大小
+                    ctx.drawImage(this,100,100,250,250);
+                }
             } 
     }
     </script>
