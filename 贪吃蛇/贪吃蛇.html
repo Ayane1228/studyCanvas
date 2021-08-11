@@ -76,7 +76,7 @@
                 // 初始化绘制蛇,食物
                 snake.forEach(n=>setBlock(n,0));
                 setBlock(food,1);
-                // 是否赞同
+                // 是否暂停
                 var parse = false;
                 //蛇移动
                 function move() {
@@ -97,13 +97,13 @@
                         // 当在蛇身体内重新生成食物
                         do {
                             // 生成新食物且不删除尾部(相当于蛇长度 + 1)
-                            food = Math.random() * g_col * g_row;
+                            food = Math.floor(Math.random() * g_col * g_row);
+                            setBlock(food,1);
                         } while (snake.includes(food));
-                        setBlock(food,1);
                     } else {
                         // 删除末节点
-                        let tail = snake.pop();
-                        setBlock(tail,2);
+                        console.log("删除末节点 ");
+                        setBlock(snake.pop(),2);
                     }
                 };
                 // 定时器
