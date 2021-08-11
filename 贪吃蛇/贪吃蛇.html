@@ -70,21 +70,66 @@
                     // 绘制 颜色 位置 大小
                     ctx.fillStyle = colours[colour];
                     // ctx.fillRact(x,y,w,h);
-                    ctx.fillRect(x,y,g_block - g_margin * 2,g_block - g_margin * 2);
+                    ctx.fillRect(x,y,g_block,g_block);
                     ctx.restore();
                 }
-                // 初始化绘制蛇
+                // 初始化绘制蛇,食物
                 snake.forEach(n=>setBlock(n,0));
                 setBlock(food,1);
-                // 手动移动蛇
-                let next = snake[0] + direction;
-                // 在头部添加下一节点
-                snake.unshift(next);
-                // 进行渲染
-                setBlock(next,0);
-                // 删除末节点并返回重新渲染为背景色
-                let tail = snake.pop();
-                setBlock(tail,2);
+                // 是否赞同
+                var parse = false;
+                //蛇移动
+                function move() {
+                    let next = snake[0] + direction;
+                    // 解决边界问题
+                    let exp1 = next < 0,exp2 = next > g_col * g_row,exp3 = (direction == 1 && next % g_col == 0), exp4 = (direction == -1 && next % g_col== (g_col - 1));
+                    // 当出界时，游戏结束
+                    if(exp1|| exp2 || exp3 || exp4){
+                        alert(" Game Over~");
+                        clearInterval(timer);
+                        return;
+                    }
+                    // 在头部添加下一节点
+                    snake.unshift(next);
+                    // 进行渲染
+                    setBlock(next,0);
+                    if(next == food){
+                        // 当在蛇身体内重新生成食物
+                        do {
+                            // 生成新食物且不删除尾部(相当于蛇长度 + 1)
+                            food = Math.random() * g_col * g_row;
+                        } while (snake.includes(food));
+                        setBlock(food,1);
+                    } else {
+                        // 删除末节点
+                        let tail = snake.pop();
+                        setBlock(tail,2);
+                    }
+                };
+                // 定时器
+                var timer;
+                timer = setInterval(move,300);
+                // 键盘事件
+                document.addEventListener("keydown",(e) => {
+                    let keyCode = e.keyCode;
+                    // 按空格暂停或重启
+                    if( keyCode ===  32 ){
+                        if (parse) {
+                            // 重启游戏
+                            timer = setInterval(move,300);
+                            parse = false;
+                        } else {
+                            clearInterval(timer);
+                            parse = true;
+                        }
+                    } else if ( [37,38,39,40].includes(keyCode)){
+                        // 移动，设置方向
+                        var directions = [-1,-20,1,20];
+                        direction = directions[keyCode - 37];
+                    } else {
+                        return;
+                    }
+                })
             } 
     }
     </script>
